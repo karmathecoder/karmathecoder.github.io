@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Main HTML</title>
+  <style>
+    .loading {
+      display: none;
+    }
+    #iframeContainer {
+      display: none;
+    }
+    iframe {
+      width: 100%;
+      height: 100vh;
+    }
+  </style>
+  <script>
+    function loadHTML() {
+      var iframeContainer = document.getElementById('iframeContainer');
+      var loadingStatus = document.getElementById('loadingStatus');
+
+      loadingStatus.style.display = 'block'; // Show loading status
+
+      var iframe1 = document.createElement('iframe');
+      iframe1.src = 'Bagalkote_Chloride_21_22.html';
+      iframe1.onload = function() {
+        var iframe2 = document.createElement('iframe');
+        iframe2.src = 'Bagalkote_Fluoride_21_22.html';
+        iframe2.onload = function() {
+          iframeContainer.style.display = 'block'; // Show iframe container
+          loadingStatus.style.display = 'none'; // Hide loading status
+        };
+        iframeContainer.appendChild(iframe2);
+      };
+      iframeContainer.appendChild(iframe1);
+    }
+  </script>
+</head>
+<body>
+  <h1>Main HTML</h1>
+  <div id="loadingStatus" class="loading">Loading...</div>
+  <button onclick="loadHTML()">Load HTML</button>
+  <div id="iframeContainer"></div>
+</body>
+</html>
